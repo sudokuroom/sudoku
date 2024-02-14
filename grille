@@ -1,2 +1,12 @@
 class Grille:
-  pass
+  """
+      Modèle de grille de Sudoku
+  """
+  def __init__(self):
+    self.grille = [] 
+    pass
+
+  def grille_vecteur(self, vecteur):
+    #vérifier la longueur vecteur {longueur == 80}
+    pass
+    # boucle sur le vecteur transformer indice k en deux indices i et j
