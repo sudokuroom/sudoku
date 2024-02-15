@@ -1,12 +1,58 @@
-class Grille:
-  """
-      Modèle de grille de Sudoku
-  """
-  def __init__(self):
-    self.grille = [] 
-    pass
+from math import floor
 
-  def grille_vecteur(self, vecteur):
-    #vérifier la longueur vecteur {longueur == 80}
-    pass
-    # boucle sur le vecteur transformer indice k en deux indices i et j
+class Grille:
+  """      Modèle objet de Grille de Sudoku : Une grille est un tableau de dimension 9x9
+  """
+  # Constructeur
+  def __init__(self):
+    self.grille = [
+    [1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ]
+  
+  # Afficher la grille
+  def afficher(self):
+    for i in range(9):
+        if i % 3 == 0 and i != 0:
+            print("- - - - - - - - - - - - ")       
+        for j in range(9):
+            if j % 3 == 0 and j != 0:
+                print(" | ", end="")
+            if j == 8:
+                print(self.grille[i][j])
+            else:
+                print(str(self.grille[i][j]) + " ", end="")
+  
+  # Entrer une grille sous forme de chaine  len(chaine) = 81
+  def set_grille_chaine(self, chaine):
+    vecteur = list(map(lambda x: ord(x)-48, chaine))
+    for k in range(81):
+      i = floor(k/9)  # 21//9 idem
+      j = k - 9*i
+      self.grille[i][j] = vecteur[k]
+    
+
+# -----------------------------------------
+# Tests module
+# -----------------------------------------
+
+grille = Grille()
+
+grille.afficher()
+print("***************************")
+
+chaine = "123456789123456789123456789123456789123456789123456789123456789123456789123456789"
+
+grille.set_grille_chaine(chaine)
+
+grille.afficher()
+ 
+
+
