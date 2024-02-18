@@ -27,8 +27,8 @@ class Grille:
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ]
-    self.nb = 0
-    self.solution = [[0 for i in range(9)] for j in range(9)]  # utilisation: print(grille.solution)
+    self.nb = 0                                                 # nombre de solutions trouvées par resoudre()
+    self.solution = [[0 for i in range(9)] for j in range(9)]   # utilisation: print(grille.solution)
   
   # Afficher la grille courante 9x9
   def afficher(self):
@@ -84,8 +84,7 @@ class Grille:
       return True
   
   # résoudre la grille de sudoku
-  def resoudre(self):
-      self.nb = 0
+  def resoudre(self):      
       for x in range(9):
           for y in range(9):
               if self.grille[x][y] == 0:
@@ -144,27 +143,22 @@ class Grille:
   # Transposition
   def echanger(self):
      pass
+  
+  # Rotation de 90 degrés à droite, position de la cellule après rotation: i -> j et j -> 9 - i -1
+  def rotation(self):
+    tempo = [[0]*9 for i in range(9)]
+    for i in range(9):
+        for j in range(9):
+      # Accéder à la cellule courante
+          tempo[j][8-i] = self.grille[i][j]
+    self.grille = tempo
+
 # -----------------------------------------
 # Tests module
 # -----------------------------------------
 
-test0 = "564982731819437625732651984198265347657348192423179568371894256985726413246513879"
-test1 = "560002030009007000030050000100000300650348092003000008000090050000700400040500079"
-test = "030001005600000090090620000061090003000070000500030470000015080050000002900300040"
+probleme = "560002030009007000030050000100000300650348092003000008000090050000700400040500079"
+solution = "564982731819437625732651984198265347657348192423179568371894256985726413246513879"
 
-
-grille = Grille()
-
-grille.set_grille_chaine(test0)
-
-grille.afficher()
-print("***********************")
-
-grille.permuter([0,9,7,8,1,2,3,5,4,6])
-
-grille.afficher()
-
-# print(grille.solution)
-
-print(grille.valide())
+test     = "030001005600000090090620000061090003000070000500030470000015080050000002900300040"
 
