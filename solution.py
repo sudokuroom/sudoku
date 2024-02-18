@@ -1,5 +1,7 @@
 from grille import *
 
+# module de mise au point la classe Solution ne sera pas developée finalement
+
 #  grid = [[0 for i in range(9)] for j in range(9)]
 
 grid = [
@@ -105,4 +107,4 @@ pb.afficher()
 
 solve()
 
-pb.sauver("mon sudoku")
+
