@@ -3,7 +3,7 @@ class Grille:
   afficher()                      afficher la grille courante
   set_grille(grille)              entrer une grille comme tableau 9x9
   set_grille_chaine(chaine)       entrer une grille comme chaine 81 caractères
-  valide()                        retourne True si la grille courante est valide
+  valide()                        retourne True si la grille courante (complète) est valide
   permis(x,y,n)                   vérifie que le chiffre n est permis en x y retourne True False
   resoudre()                      résolution de la grille de sudoku (récursif)
   sauver(nom_fichier)             sauvegarder la grille courante comme une chaine de 81 caractères
@@ -54,6 +54,9 @@ class Grille:
   # Entrer une grille sous forme de matrice 9x9 (a revoir l'adresse passée en paramètre)
   def set_grille(self, tableau):
     self.grille = tableau
+  # Fournir une grille sous forme de matrice 9x9
+  def get_grille(self):
+     pass
 
   # Vérifier si la grille complète est valide (ne traite pas les grilles partielles)
   def valide(self):
