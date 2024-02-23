@@ -43,12 +43,12 @@ class Grille:
             else:
                 print(str(self.grille[i][j]) + " ", end="")
   
-  # Entrer une grille sous forme de chaine  len(chaine) = 81
+  # Entrer une grille sous forme de chaine  len(chaine) = 81  (soit k position de 0 à 80 alors i = k//9 j = k%9)
   def set_grille_chaine(self, chaine):
     vecteur = list(map(lambda x: ord(x)-48, chaine))
     for k in range(81):
-      i = k//9    # floor(k/9)
-      j = k - 9*i
+      i = k//9      # floor(k/9)
+      j = k - 9*i   # k%9
       self.grille[i][j] = vecteur[k]
     
   # Entrer une grille sous forme de matrice 9x9 (a revoir l'adresse passée en paramètre)
@@ -56,7 +56,8 @@ class Grille:
     self.grille = tableau
   # Fournir une grille sous forme de matrice 9x9
   def get_grille(self):
-     pass
+     return self.grille
+    
 
   # Vérifier si la grille complète est valide (ne traite pas les grilles partielles)
   def valide(self):
@@ -163,5 +164,7 @@ class Grille:
 probleme = "560002030009007000030050000100000300650348092003000008000090050000700400040500079"
 solution = "564982731819437625732651984198265347657348192423179568371894256985726413246513879"
 
-test     = "030001005600000090090620000061090003000070000500030470000015080050000002900300040"
+test       = "030001005600000090090620000061090003000070000500030470000015080050000002900300040"
+
+couverture = "703000005680702000000000800900800000007326400000009001004000000000203074100000206"
 

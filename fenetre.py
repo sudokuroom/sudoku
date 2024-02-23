@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter.scrolledtext import ScrolledText
 
 class Fenetre(Tk):
     def __init__(self):
@@ -11,6 +12,7 @@ class Fenetre(Tk):
         label = Label(self, text="test")
         #label.grid(row=0, column=1)
         self.title("Grille 9x9")
+        txt = 1
 
     def afficher_grille(self):
         tableau = []

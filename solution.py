@@ -1,6 +1,6 @@
 from grille import *
 
-# module de mise au point la classe Solution ne sera pas developée finalement
+# module de mise au point mais la classe Solution ne sera pas developpée finalement
 
 #  grid = [[0 for i in range(9)] for j in range(9)]
 
@@ -42,7 +42,6 @@ class Solution:
 
     # résoudre le sudoku
     def resoudre(self):
-        self.nb = 0
         for x in range(9):
             for y in range(9):
                 if self.grille[x][y] == 0:
@@ -55,7 +54,7 @@ class Solution:
         self.nb = self.nb + 1
         
 
-
+# bloc logiciel copié depuis Foxxpy sur Youtube
 
 
 def n_valide(y, x, n):
