@@ -45,11 +45,16 @@ class Grille:
   
   # Entrer une grille sous forme de chaine  len(chaine) = 81  (soit k position de 0 à 80 alors i = k//9 j = k%9)
   def set_grille_chaine(self, chaine):
-    vecteur = list(map(lambda x: ord(x)-48, chaine))
-    for k in range(81):
-      i = k//9      # floor(k/9)
-      j = k - 9*i   # k%9
-      self.grille[i][j] = vecteur[k]
+    vecteur = list(map(lambda x: ord(x)-48, chaine))            # convertir alpha en chiffres 0 à 9
+    for i in vecteur: 
+       if vecteur[i] < 0 or vecteur[i] > 9: vecteur[i] = 0      # remplace par 0 les caractères non chiffres 0 à 9
+    if len(vecteur) == 81:                                      # contrôle la longueur du vecteur
+      for k in range(81):
+        i = k//9      # floor(k/9)
+        j = k - 9*i   # k%9
+        self.grille[i][j] = vecteur[k]
+    else:
+       print("La chaine de caractères doit être composée de 81 caractère")
     
   # Entrer une grille sous forme de matrice 9x9 (a revoir l'adresse passée en paramètre)
   def set_grille(self, tableau):
