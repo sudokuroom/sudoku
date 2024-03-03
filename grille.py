@@ -46,7 +46,7 @@ class Grille:
     frame = tk.Frame(root, borderwidth=2, relief='solid')
     frame.pack(expand=True, fill='both')
 # Grille de Sudoku
-    sudoku_grid = SudokuGrid(frame)
+    sudoku_grid = SudokuGrid(frame, self.grille)
     sudoku_grid.pack(expand=True, fill='both')
     root.mainloop()
      

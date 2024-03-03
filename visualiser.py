@@ -2,6 +2,11 @@ import tkinter as tk
     
 # Affichage d'une grille de Sudoku dans une fenetre tkinter
 
+class Case(tk.Entry):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+        self.config(font=('Helvetica', 16, "bold"), justify='center')
+
 class SudokuGrid(tk.Frame):
     def __init__(self, master, grille):
         super().__init__(master)
@@ -20,13 +25,6 @@ class SudokuGrid(tk.Frame):
     ]
         self.grid_propagate(False)
         self.create_grid()
-        # self.grid()
-        # self.mainloop()
-
-    class Case(tk.Entry):
-        def __init__(self, master, **kwargs):
-            super().__init__(master, **kwargs)
-            self.config(font=('Helvetica', 16, "bold"), justify='center')
     
     def create_grid(self):
         for i in range(3):
@@ -39,10 +37,10 @@ class SudokuGrid(tk.Frame):
 
     def create_subgrid(self, master, x, y):
         for i in range(3):
-            master.grid_rowconfigure(i, weight=1)  # Poids pour étirer verticalement
+            master.grid_rowconfigure(i, weight=1)           # Poids pour étirer verticalement
             for j in range(3):
-                master.grid_columnconfigure(j, weight=1)  # Poids pour étirer horizontalement
-                case = Case(master, width=2)
+                master.grid_columnconfigure(j, weight=1)    # Poids pour étirer horizontalement
+                case = Case(master, width = 2)
                 case.grid(row=i, column=j, sticky='nsew')
                 a = i+3*x
                 b = j+3*y
@@ -51,7 +49,18 @@ class SudokuGrid(tk.Frame):
                     case.config(state='disabled')
 
 # Utilisation du module:
-"""
+
+grid = [
+    [4,0,0,0,0,2,0,7,6],
+    [0,0,5,0,0,8,0,9,0],
+    [8,0,3,0,7,0,0,0,0],
+    [1,0,0,0,0,6,0,0,0],
+    [6,0,2,5,0,0,4,0,0],
+    [0,0,0,8,0,9,0,0,1],
+    [0,7,0,4,0,0,0,2,0],
+    [0,0,0,0,3,0,0,0,0],
+    [3,0,1,2,0,0,0,5,0]
+    ]
 root = tk.Tk()
 root.title("Grille de Sudoku")
 root.geometry("400x400")
@@ -61,9 +70,9 @@ frame = tk.Frame(root, borderwidth=2, relief='solid')
 frame.pack(expand=True, fill='both')
 
 # Grille de Sudoku
-sudoku_grid = SudokuGrid(frame)
+sudoku_grid = SudokuGrid(frame, grid)
 sudoku_grid.pack(expand=True, fill='both')
 
 root.mainloop()
-"""
+
 
