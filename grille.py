@@ -3,7 +3,6 @@ from visualiser import *
 
 class Grille:
   """   Modèle objet de Grille de Sudoku : Une grille est un tableau de dimension 9x9
-  
   set_grille(grille)              entrer une grille comme tableau 9x9
   set_grille_chaine(chaine)       entrer une grille comme chaine 81 caractères
   valide()                        retourne True si la grille courante (complète) est valide
