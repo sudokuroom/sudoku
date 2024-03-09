@@ -2,7 +2,12 @@ Apprentissage de Github avec un projet de générateur de grilles de Sudoku.
 
 (Une partie du code provient de Gemini et chatGPT que je remercie chaleureusement !)
 
-En l'état seul le module grille est correct, les fonctions sont testées et correctes.
+Un objet Grille permet de travailler sur une seule grille, la liste des opérations figure dans la docstring
 
-Certaines fonctions ne sont pas implémentées, elles sont mises en pass.
+La grille est dans le tableau grille et sa solution dans le tableau solution.
+
+Le tableau candidats contient une liste des chiffres possibles dans chaque case ou une liste vide.
+
+La fonction d'évaluation calcule les principaux paramètres de la grille.
+
 
