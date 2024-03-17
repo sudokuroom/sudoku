@@ -36,7 +36,7 @@ class SudokuGrid(tk.Frame):
                     case.insert(tk.END, str(self.grille[a][b]))
                     case.config(state='disabled')
 
-# Utilisation du module:
+# Utilisation du module graphique
 """
 if __name__ == "__main__":
     grid = [

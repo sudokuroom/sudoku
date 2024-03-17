@@ -1,82 +1,71 @@
 import random
+from grille import *
 
-# generateur Gemini
+# Genération d'une grille de Sudoku complète (avec 81 chiffres)
 
- # Vérifier si n est permis dans la case x y  {assertion: la case x y est vide}
-def permis(grille,x,y,n):
+class Generateur():
+    def __init__(self) -> None:
+        self.grille = [[0 for _ in range(9)] for _ in range(9)]
+        self.solve_sudoku()
+
+    def permis(self,x,y,n):
       for k in range(9):
-          if grille[x][k] == n: return False     # parcours ligne
-          if grille[k][y] == n: return False     # parcours colonne
-      x0, y0 = (x//3)*3, (y//3)*3                # base du bloc 3x3 de x y
+          if self.grille[x][k] == n: return False     # parcours ligne
+          if self.grille[k][y] == n: return False     # parcours colonne
+      x0, y0 = (x//3)*3, (y//3)*3                     # base du bloc 3x3 de x y
       for i in range(3):
           for j in range(3):
-              if grille[x0+i][y0+j] == n: return False
+              if self.grille[x0+i][y0+j] == n: return False
       return True
 
-def est_valide(grille, i, j, valeur):
-    """     Vérifie si la valeur est valide dans la case (i, j) de la grille.     """
-    for k in range(9):
-        if grille[i][k] == valeur or grille[k][j] == valeur:
-            return False
-    ligne_debut = (i // 3) * 3
-    colonne_debut = (j // 3) * 3
-    for k in range(3):
-        for l in range(3):
-            if grille[ligne_debut + k][colonne_debut + l] == valeur:
-                return False
-    return True
+    def is_safe(self, grid, row, col, num):
+        # Vérifier la ligne
+        if num in grid[row]:
+            return False     
+        # Vérifier la colonne
+        if num in [grid[i][col] for i in range(9)]:
+            return False       
+        # Vérifier le carré 3x3
+        start_row, start_col = 3 * (row // 3), 3 * (col // 3)
+        for i in range(3):
+            for j in range(3):
+                if grid[start_row + i][start_col + j] == num:
+                    return False        
+        return True
 
-def generer_grille_sudoku(difficulte):
-    """
-    Génère une grille de Sudoku aléatoire avec un niveau de difficulté donné.
-    """
-    grille = [[0 for i in range(9)] for j in range(9)]
+    def solve_sudoku(self):
+        empty_cell = self.find_empty_cell()
+        if not empty_cell:
+            return True  # La grille est remplie
+        
+        row, col = empty_cell
 
-    random.seed()
+        for num in random.sample(range(1, 10), 9):
+            if self.is_safe(self.grille, row, col, num):
+                self.grille[row][col] = num
 
-    # Remplir aléatoirement des cases
-    for _ in range(difficulte):
-        random.seed()
-        while True:
-            i = random.randint(0, 8)
-            j = random.randint(0, 8)
-            valeur = random.randint(1, 9)
-            if permis(grille, i, j, valeur):
-                grille[i][j] = valeur
-                break
-
-    # Utiliser le backtracking pour remplir les cases vides
-    def backtrack(i, j):
-        if i == 9:
-            return True
-        if j == 9:
-            return backtrack(i + 1, 0)
-        if grille[i][j] != 0:
-            return backtrack(i, j + 1)
-        for valeur in range(1, 10):
-            if permis(grille, i, j, valeur):
-                grille[i][j] = valeur
-                if backtrack(i, j + 1):
+                if self.solve_sudoku():
                     return True
-                grille[i][j] = 0
-        return False
 
-    backtrack(0, 0)
+                self.grille[row][col] = 0  # Annuler l'attribution si le chiffre ne convient pas
+        
+        return False  # Aucune solution trouvée
 
-    return grille
+    def find_empty_cell(self):
+            for i in range(9):
+                for j in range(9):
+                    if self.grille[i][j] == 0:
+                        return i, j
+            return None
 
-def afficher_grille(grille):
-    """
-    Affiche la grille de Sudoku sur la console.
-    """
-    c = ""
-    for i in range(9):
-        for j in range(9):
-            print(grille[i][j], end=" ")
-            c = c + chr(48+grille[i][j])
-        print()
-    print(c)
 
-# Génération et affichage d'une grille de Sudoku
-grille = generer_grille_sudoku(25)
-afficher_grille(grille)
+# Tests
+if __name__ == "__main__":
+    g = Generateur()
+    print(g.grille)
+
+    gg = Grille()
+    gg.grille = g.grille
+    gg.visualiser()
+
+ 
